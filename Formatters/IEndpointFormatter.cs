@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bus.RedeliveryCountError.Sample.Abstractions;
+namespace Bus.RedeliveryCountError.Sample.Formatters;
 
 public interface IEndpointFormatter
 {

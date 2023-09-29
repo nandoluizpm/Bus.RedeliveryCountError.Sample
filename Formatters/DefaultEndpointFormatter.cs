@@ -1,5 +1,4 @@
 ﻿using System;
-using Bus.RedeliveryCountError.Sample.Abstractions;
 using MassTransit;
 
 namespace Bus.RedeliveryCountError.Sample.Formatters;

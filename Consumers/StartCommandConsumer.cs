@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Bus.RedeliveryCountError.Sample.Abstractions;
+using Bus.RedeliveryCountError.Sample.Formatters;
 using Bus.RedeliveryCountError.Sample.Messages;
 using MassTransit;
 using Microsoft.Extensions.Logging;
@@ -49,11 +49,9 @@ public class StartCommandConsumer : IConsumer<StartCommand>
                 ShouldThrowException = context.Message.ActivityCThrowOnExecution,
                 ShouldThrowIgnoredException = context.Message.ShouldThrowIgnoredException
             });
-        //builder.AddSubscription(new Uri("rabbitmq://localhost/execute_downloadimage"), RoutingSlipEvents.All);
 
         var routingSlip = builder.Build();
         
-        //await _bus.Execute(routingSlip);
         var endpoint = await _bus.GetSendEndpoint(routingSlip.GetNextExecuteAddress()!);
         await endpoint.Send(routingSlip, routingSlip.GetType(), Pipe.New<SendContext>(_ => { }));
     }
