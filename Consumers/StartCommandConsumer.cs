@@ -51,8 +51,6 @@ public class StartCommandConsumer : IConsumer<StartCommand>
             });
 
         var routingSlip = builder.Build();
-        
-        var endpoint = await _bus.GetSendEndpoint(routingSlip.GetNextExecuteAddress()!);
-        await endpoint.Send(routingSlip, routingSlip.GetType(), Pipe.New<SendContext>(_ => { }));
+        await _bus.Execute(routingSlip);
     }
 }
